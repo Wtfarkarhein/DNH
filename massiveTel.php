@@ -83,10 +83,11 @@ function donate($card,$paymentId,$name,$email){
 	];
 
 	$randomUserAgent = $userAgents[array_rand($userAgents)];
-	$username = "customer-sidney_sv8Rq";
-	$password = "Sidney15900_";
-	$PROXYSCRAPE_PORT = 7777;
-	$PROXYSCRAPE_HOSTNAME = 'pr.oxylabs.io';
+	//add your proxy here
+	// $username = "";
+	// $password = "";
+	// $PROXYSCRAPE_PORT = ;
+	// $PROXYSCRAPE_HOSTNAME = '';
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, 'https://intercleft.com/wp-admin/admin-ajax.php?t=1722765796568');
 	curl_setopt($ch, CURLOPT_POST, true);
@@ -97,10 +98,10 @@ function donate($card,$paymentId,$name,$email){
 	    'User-Agent: ' . $randomUserAgent,
 	    'X-Requested-With: XMLHttpRequest'
 	));
-	curl_setopt($ch, CURLOPT_PROXYPORT, $PROXYSCRAPE_PORT);
-	curl_setopt($ch, CURLOPT_PROXYTYPE, 'HTTP');
-	curl_setopt($ch, CURLOPT_PROXY, $PROXYSCRAPE_HOSTNAME);
-	curl_setopt($ch, CURLOPT_PROXYUSERPWD, $username.':'.$password);
+	// curl_setopt($ch, CURLOPT_PROXYPORT, $PROXYSCRAPE_PORT);
+	// curl_setopt($ch, CURLOPT_PROXYTYPE, 'HTTP');
+	// curl_setopt($ch, CURLOPT_PROXY, $PROXYSCRAPE_HOSTNAME);
+	// curl_setopt($ch, CURLOPT_PROXYUSERPWD, $username.':'.$password);
 	$response = curl_exec($ch);
 	if (curl_errno($ch)) {
 	    return [
