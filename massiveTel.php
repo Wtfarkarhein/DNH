@@ -182,7 +182,6 @@ function sendTele($message){
 }
 
 $file = "combo.txt";
-$chatId = readline("Enter Your Telgram Chat ID: ");
 $cardList = file_get_contents($file);
 if ($cardList === false) {
     die("Error: Unable to read card list file. \n");
