@@ -104,6 +104,7 @@ function donate($card,$paymentId,$name,$email){
 	// curl_setopt($ch, CURLOPT_PROXY, $PROXYSCRAPE_HOSTNAME);
 	// curl_setopt($ch, CURLOPT_PROXYUSERPWD, $username.':'.$password);
 	$response = curl_exec($ch);
+	echo $response;
 	if (curl_errno($ch)) {
 	    return [
     		false,
